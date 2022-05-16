@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver import Keys
 from selenium.common.exceptions import NoSuchElementException
 import WeGoStudy_locators as locators
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 
 # AWS HEADLESS MODE
 from selenium.webdriver.chrome.options import Options
