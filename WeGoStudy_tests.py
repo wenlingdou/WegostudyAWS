@@ -9,14 +9,17 @@ class PositiveTestCases(unittest.TestCase):
         methods.setUp()
         methods.login()
         # methods.create_new_student() #  no more new students
-        # methods.create_new_application()  # bug in website - doesnt work
-        # methods.view_student_details() # view student details is implicit in edit student details
         methods.edit_student_details()
+        # methods.create_new_application()  # don't need new applications
         methods.view_application_list()
+        # methods.create_referral()  # cannot delete referrals, don't make more. Doesnt work, (pop up window)
         methods.commissions()
+        methods.sort_by_dropdown_menu()
         methods.filter_by_study_area()
         methods.filter_by_city()
         methods.filter_by_program()
         methods.schools()
+        methods.schools_sort_by()
         methods.logout()
         methods.tearDown()
+        

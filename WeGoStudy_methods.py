@@ -47,6 +47,7 @@ def setUp():
         driver.close()
         driver.quit()
 
+
 def tearDown():
     if driver is not None:
         print(f'---------The test is passed.----------------')
@@ -55,7 +56,9 @@ def tearDown():
         driver.close()
         driver.quit()
 
+
 def login():
+    print('------------ login -----------------')
     driver.find_element(By.XPATH, '//b[normalize-space()="LOGIN"]').click()
     sleep(0.25)
     driver.find_element(By.ID, 'user_email').send_keys(locators.admin_email)
@@ -64,9 +67,10 @@ def login():
     sleep(0.25)
     driver.find_element(By.XPATH, '//input[@value="SIGN IN"]').click()
     sleep(0.5)
-    driver.find_element(By.ID,'authentication-popup').is_displayed()
+    driver.find_element(By.ID, 'authentication-popup').is_displayed()
     sleep(3)
-    print('------------Signed up successfully!-----------------')
+    print('------------ logged in successfully!-----------------')
+
 
 def logout():
     driver.find_element(By.CSS_SELECTOR, 'span[class="my-auto mr-2 pf-name"]').click()
@@ -79,13 +83,13 @@ def logout():
 
 
 def create_new_student():
-    if driver.current_url==locators.login_page_url:
+    if driver.current_url == locators.login_page_url:
         print(f'----------Current URL: {locators.login_page_url}--------')
     driver.find_element(By.XPATH, '//span[normalize-space()="My WeGoStudy"]').click()
     sleep(0.25)
     driver.find_element(By.XPATH, '//a[normalize-space()="Students"]').click()
     sleep(0.25)
-    if driver.current_url==locators.student_page_url:
+    if driver.current_url == locators.student_page_url:
         print(f'-------------Create New Student----------------------')
     driver.find_element(By.XPATH, '//a[normalize-space()="Create New Student"]').click()
     sleep(0.25)
@@ -93,7 +97,7 @@ def create_new_student():
     # date of birth
     driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys('1')
     sleep(1.5)
-    driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys(10*Keys.BACKSPACE)
+    driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys(10 * Keys.BACKSPACE)
     sleep(1.5)
     driver.find_element(By.ID, 'user_student_detail_attributes_birth_date').send_keys(locators.birthday)
     sleep(0.5)
@@ -117,7 +121,6 @@ def create_new_student():
     # driver.find_element(By.XPATH, f'//li[@data-option-array-index="{x}"]').click()
     # sleep(0.5)
 
-
     # select province
     driver.find_element(By.XPATH, '//span[text()="Province/State"]').click()
     sleep(0.5)
@@ -133,7 +136,8 @@ def create_new_student():
     driver.find_element(By.XPATH, '//span[text()="City"]').click()
     sleep(0.5)
 
-    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_address_attributes_city_chosen"]/div/ul/li[2]').click()
+    driver.find_element(By.XPATH,
+                        '//*[@id="user_student_detail_attributes_address_attributes_city_chosen"]/div/ul/li[2]').click()
     sleep(0.5)
     # driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_address_attributes_city_chosen"]/div/div/input').send_keys(Keys.RETURN)
     # sleep(0.25)
@@ -141,19 +145,26 @@ def create_new_student():
     # select Credentials
     driver.find_element(By.XPATH, '//span[contains(., "Credentials")]').click()
     sleep(0.25)
-    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_user_educations_attributes_0_credentials_chosen"]/div/div/input').send_keys('Degree')
+    driver.find_element(By.XPATH,
+                        '//*[@id="user_student_detail_attributes_user_educations_attributes_0_credentials_chosen"]/div/div/input').send_keys(
+        'Degree')
     sleep(0.25)
-    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_user_educations_attributes_0_credentials_chosen"]/div/div/input').send_keys(Keys.RETURN)
+    driver.find_element(By.XPATH,
+                        '//*[@id="user_student_detail_attributes_user_educations_attributes_0_credentials_chosen"]/div/div/input').send_keys(
+        Keys.RETURN)
     sleep(0.25)
 
     # select GPA Scale
     driver.find_element(By.XPATH, '//span[contains(., "GPA Scale")]').click()
     sleep(0.25)
-    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/div/div/input').send_keys('100')
+    driver.find_element(By.XPATH,
+                        '//*[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/div/div/input').send_keys(
+        '100')
     sleep(0.25)
-    driver.find_element(By.XPATH, '//*[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/div/div/input').send_keys(Keys.RETURN)
+    driver.find_element(By.XPATH,
+                        '//*[@id="user_student_detail_attributes_user_educations_attributes_0_gpa_scale_chosen"]/div/div/input').send_keys(
+        Keys.RETURN)
     sleep(0.25)
-
 
     for i in range(len(locators.lst_column)):
         clm, fid, val = locators.lst_column[i], locators.lst_id[i], locators.lst_value[i]
@@ -249,20 +260,11 @@ def edit_student_details():
     driver.find_element(By.XPATH,
                         '//*[@id="user_student_detail_attributes_user_educations_attributes_0_credentials_chosen"]/div/div/input').send_keys(
         Keys.RETURN)
-    sleep(0.25)
-
-    for i in range(len(locators.lst_column)):
-        clm, fid, val = locators.lst_column[i], locators.lst_id[i], locators.lst_value[i]
-        driver.find_element(By.ID, fid).send_keys(str(val))
-        sleep(0.25)
+    sleep(5)
 
     driver.find_element(By.XPATH, '//body//form').click()
     sleep(6)
-    print(f'***************** Student Details edited ******************')
-    # driver.find_element(By.XPATH, '//input[@value="Save"]').click()
-    # sleep(5)
-    # driver.find_element(By.CLASS_NAME, 'toast-message').is_displayed()
-    # sleep(5)
+    print(f'***************** Student Detail was successfully updated ******************')
 
 
 def view_application_list():
@@ -278,6 +280,31 @@ def view_application_list():
     sleep(2)
 
 
+def create_referral():  # cannot delete referrals, don't make more. Doesnt work, (pop up window)
+    print(f'***************** create_referral ******************')
+
+    driver.find_element(By.XPATH, '//span[normalize-space()="My WeGoStudy"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Referrals"]').click()
+    sleep(1.5)
+    driver.find_element(By.LINK_TEXT, 'Create Referral').click()
+    sleep(5)
+    driver.find_element(By.ID, 'referral_first_name').send_keys('Ran')
+    sleep(2)
+    driver.find_element(By.ID, 'referral_last_name').send_keys('Dom')
+    driver.find_element(By.ID, 'referral_email_id').send_keys('ran.dom@hotmail.com')
+    sleep(2)
+    driver.find_element(By.ID, 'school_id').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//option[@value="20"]').click()
+    sleep(1.5)
+    driver.find_element(By.ID, 'program_id').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//option[@value="1922"]').click()
+    sleep(1.5)
+    driver.find_element(By.ID, 'submit_referral').click()
+    sleep(6)
+
 
 def commissions():
     print(f' ************ Commissions ************************************')
@@ -285,6 +312,27 @@ def commissions():
     sleep(1.25)
     driver.find_element(By.XPATH, '//a[normalize-space()="Commission"]').click()
     sleep(2)
+
+
+
+def sort_by_dropdown_menu():
+    print(f'***************** Sort By Dropdown Menu  ******************')
+    driver.find_element(By.XPATH, '//span[normalize-space()="My WeGoStudy"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Students"]').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="First Name"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Last Name"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Profile Created"]').click()
+    sleep(1.25)
 
 
 def filter_by_study_area():
@@ -299,7 +347,6 @@ def filter_by_study_area():
     sleep(3)
     driver.find_element(By.XPATH, '//div[@id="filter_by_study_area"]//a[@class="apply_filter disable_apply"][normalize-space()="Apply"]').click()
     sleep(6)
-
 
 
 def filter_by_city():
@@ -349,6 +396,32 @@ def schools():
     sleep(5)
 
 
+def schools_sort_by():
+    print(f'***************** Sort By ******************')
+    driver.find_element(By.XPATH, '//a[normalize-space()="Schools"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Alphabetic A to Z"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Alphabetic Z to A"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Location A to Z"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Location Z to A"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Program"]').click()
+    sleep(1.25)
+
+
 
 
 # setUp()
@@ -357,12 +430,13 @@ def schools():
 # create_new_application()
 # edit_student_details()
 # view_application_list()
+# create_referral()
 # commissions()
+# sort_by_dropdown_menu()
 # filter_by_study_area()
 # filter_by_city()
 # filter_by_program()
 # schools()
+# schools_sort_by()
 # logout()
 # tearDown()
-
-
