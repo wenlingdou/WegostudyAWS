@@ -13,6 +13,7 @@ admin_email = 'pewec@protonmail.com'
 admin_password = '789WeStudy!'
 login_page_url = 'https://www.wegostudy.ca/partner/home'
 student_page_url = 'https://www.wegostudy.ca/partners/student_details'
+application_page_url = 'https://www.wegostudy.ca/partners/admissions'
 
 first_name = faker.first_name()
 last_name = faker.last_name()

@@ -31,6 +31,9 @@ driver = webdriver.Chrome(options=options)
 # s=Service(ChromeDriverManager().install())
 # driver = webdriver.Chrome(service=s)
 
+
+
+
 def setUp():
     print(f'Test starts at {datetime.datetime.now()}.')
     driver.maximize_window()
@@ -73,7 +76,7 @@ def login():
 
 
 def logout():
-    driver.find_element(By.CSS_SELECTOR, 'span[class="my-auto mr-2 pf-name"]').click()
+    driver.find_element(By.XPATH, "//img[@alt='Partner']").click()
     sleep(0.25)
     driver.find_element(By.XPATH, '//a[contains(., "Log out")]').click()
     sleep(0.25)
@@ -178,47 +181,6 @@ def create_new_student():
     print('-------------Student is created successfully.-----------')
 
 
-def create_new_application():
-    print(f'***************** create_new_application ******************')
-
-    driver.find_element(By.XPATH, '//span[normalize-space()="My WeGoStudy"]').click()
-    # driver.find_element(By.CSS_SELECTOR, 'a[aria-expanded="false"] span[class="my-auto mr-2"]').click()
-    sleep(1.25)
-    driver.find_element(By.XPATH, '//a[normalize-space()="Students"]').click()
-    sleep(1.5)
-    driver.find_element(By.LINK_TEXT, 'Create Application').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//span[normalize-space()="Select School"]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//*[@id="admission_institute_detail_id_chosen"]/div/ul/li[7]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//span[normalize-space()="Select Course"]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//*[@id="admission_institute_program_id_chosen"]/div/ul/li[2]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//span[normalize-space()="Select Starting Semester"]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//*[@id="admission_starting_semester_chosen"]/div/ul/li[3]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//span[normalize-space()="Select Start Day"]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//*[@id="admission_start_day_chosen"]/div/ul/li[3]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//span[normalize-space()="Select Year"]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//*[@id="admission_start_year_chosen"]/div/ul/li[3]').click()
-    sleep(0.75)
-    driver.find_element(By.CSS_SELECTOR, '#admission_last_name').send_keys(locators.last_name)
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//input[@id="admission_electronic_communication_true"]').click()
-    sleep(0.75)
-    driver.find_element(By.XPATH, '//input[@name="commit"]').click()
-    sleep(2)
-    driver.find_element(By.CLASS_NAME, 'toast-message').is_displayed()
-    sleep(4)
-    print('-------------application is created successfully.-----------')
-
-
 def view_student_details():
     print(f'***************** View Details ******************')
     driver.find_element(By.XPATH, '//span[normalize-space()="My WeGoStudy"]').click()
@@ -280,6 +242,8 @@ def view_application_list():
     sleep(2)
 
 
+
+
 def create_referral():  # cannot delete referrals, don't make more. Doesnt work, (pop up window)
     print(f'***************** create_referral ******************')
 
@@ -323,16 +287,60 @@ def sort_by_dropdown_menu():
     sleep(2)
     driver.find_element(By.XPATH, '//div[@role="button"]').click()
     sleep(1.25)
-    driver.find_element(By.XPATH, '//a[normalize-space()="First Name"]').click()
-    sleep(1.25)
-    driver.find_element(By.XPATH, '//div[@role="button"]').click()
-    sleep(1.25)
     driver.find_element(By.XPATH, '//a[normalize-space()="Last Name"]').click()
     sleep(1.25)
     driver.find_element(By.XPATH, '//div[@role="button"]').click()
     sleep(1.25)
     driver.find_element(By.XPATH, '//a[normalize-space()="Profile Created"]').click()
     sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@role="button"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="First Name"]').click()
+    sleep(1.25)
+
+
+def create_new_application():
+    print(f'***************** create_new_application ******************')
+
+    # driver.find_element(By.XPATH, '//span[normalize-space()="My WeGoStudy"]').click()
+    # # driver.find_element(By.CSS_SELECTOR, 'a[aria-expanded="false"] span[class="my-auto mr-2"]').click()
+    # sleep(1.25)
+    # driver.find_element(By.XPATH, '//a[normalize-space()="Students"]').click()
+    # sleep(1.5)
+    driver.find_element(By.XPATH, f"//h4[normalize-space()='{locators.first_name} {locators.last_name}']").is_displayed()
+    sleep(2)
+    driver.find_element(By.LINK_TEXT, 'Create Application').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//span[normalize-space()="Select School"]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//*[@id="admission_institute_detail_id_chosen"]/div/ul/li[7]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//span[normalize-space()="Select Course"]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//*[@id="admission_institute_program_id_chosen"]/div/ul/li[2]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//span[normalize-space()="Select Starting Semester"]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//*[@id="admission_starting_semester_chosen"]/div/ul/li[3]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//span[normalize-space()="Select Start Day"]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//*[@id="admission_start_day_chosen"]/div/ul/li[3]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//span[normalize-space()="Select Year"]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//*[@id="admission_start_year_chosen"]/div/ul/li[3]').click()
+    sleep(0.75)
+    driver.find_element(By.CSS_SELECTOR, '#admission_last_name').send_keys(locators.last_name)
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//input[@id="admission_electronic_communication_true"]').click()
+    sleep(0.75)
+    driver.find_element(By.XPATH, '//input[@name="commit"]').click()
+    sleep(2)
+    driver.find_element(By.CLASS_NAME, 'toast-message').is_displayed()
+    sleep(4)
+    print('-------------application is created successfully.-----------')
+
 
 
 def filter_by_study_area():
@@ -421,22 +429,162 @@ def schools_sort_by():
     driver.find_element(By.XPATH, '//a[normalize-space()="Program"]').click()
     sleep(1.25)
 
+def add_my_favorite():
+    print(f' *********** Add My Favorite *******************')
+    driver.find_element(By.XPATH, '//a[normalize-space()="Schools"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@class="col-12 col-lg-12 col-md-12"]//div[1]//div[3]//a[1]//div[1]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[@class="favorites-btn"]').click()
+    sleep(6)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Schools"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//div[@id="featured_institutes"]//div[1]//div[3]//a[1]//div[1]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//i[@class="fa fa-heart"]').click()
+    sleep(1.25)
+
+
+
+def connect_to_wegostudy():
+    print(f' *********** Connect To We GoStudy *******************')
+    driver.find_element(By.XPATH, '//a[normalize-space()="Schools"]').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//div[@class="col-12 col-lg-12 col-md-12"]//div[1]//div[3]//a[1]//div[1]').click()
+    sleep(4)
+    original_window = driver.current_window_handle
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Connect to WeGoStudy"]').click()
+    sleep(4)
+    driver.switch_to.window(original_window)
+
+
+
+def visit_college_website():
+    print(f' *********** Visit College Website *******************')
+    driver.find_element(By.XPATH, '//a[normalize-space()="Schools"]').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//div[@class="col-12 col-lg-12 col-md-12"]//div[1]//div[3]//a[1]//div[1]').click()
+    sleep(8)
+    original_window = driver.current_window_handle
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[normalize-space()="Visit College Website"]').click()
+    sleep(8)
+    driver.switch_to.window(original_window)
+
+
+
+def tuition():
+    print(f' *********** Tuition *******************')
+    driver.find_element(By.XPATH, '//a[normalize-space()="Schools"]').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//div[@class="col-12 col-lg-12 col-md-12"]//div[1]//div[3]//a[1]//div[1]').click()
+    sleep(6)
+    original_window = driver.current_window_handle
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//a[@class="btn btn-green btn-sm pull-right"]').click()
+    sleep(4)
+    driver.switch_to.window(original_window)
+
+
+
+def apply_now():
+    print(f' *********** Apply Now *******************')
+    driver.find_element(By.XPATH, '//a[normalize-space()="Schools"]').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//div[@class="col-12 col-lg-12 col-md-12"]//div[1]//div[3]//a[1]//div[1]').click()
+    sleep(2)
+    driver.find_element(By.XPATH, '//a[@class="btn btn-blue btn-sm"]').click()
+    sleep(1.25)
+    driver.find_element(By.XPATH, '//button[normalize-space()="Close"]').click()
+    sleep(1.25)
+
+
+
+def study_area_prog_lev():
+    print(f' *********** Study Area *******************')
+    driver.find_element(By.XPATH, '//a[contains(.,  "Schools")]').click()
+    sleep(0.25)
+    driver.find_element(By.XPATH, '//h3[normalize-space()="British Columbia Institute of Technology"]').is_displayed()
+    sleep(0.25)
+    driver.find_element(By.XPATH, '//div[3]//div[3]//a[1]//div[1]').click()
+    sleep(0.25)
+    Select(driver.find_element(By.ID, 'study_area')).select_by_value('Computer, information and services')
+    sleep(0.25)
+    Select(driver.find_element(By.ID, 'level')).select_by_value('Bachelor of Technology')
+    sleep(0.25)
+    driver.find_element(By.XPATH, '//input[@value="GO"]').click()
+    sleep(0.25)
+
+
+
+# def application_page():
+#   if driver.current_url == locators.application_page_url:
+#         print(f'*****************Navigate to Application Page  ******************')
+#
+#     # test the "search the student" function
+#     driver.find_element(By.XPATH, '//span[normalize-space()="My WeGoStudy"]').click()
+#     sleep(0.25)
+#     driver.find_element(By.XPATH, '//a[normalize-space()="Applications"]').click()
+#     sleep(0.5)
+#     driver.find_element(By.XPATH, "//input[@id='student']").send_keys(locators.first_name)
+#     sleep(0.5)
+#     driver.find_element(By.ID, 'filter_application').click()
+#     sleep(1.5)
+#     driver.find_element(By.XPATH, "//a[normalize-space()='All Applications']").click()
+#     sleep(0.5)
+
+    # test all the buttons: First, Previous, 1, 2, Next, Last
+    # if we only have 1 page applictions, the following "2" will not work because we don't have 2 pages applications.
+    # driver.find_element(By.XPATH, "//a[normalize-space()='2']").click()
+    # sleep(0.5)
+    # driver.find_element(By.ID, 'admission_list_first').click()
+    # sleep(0.5)
+    # driver.find_element(By.ID, 'admission_list_last').click()
+    # sleep(0.5)
+    # driver.find_element(By.ID, 'admission_list_previous').click()
+    # sleep(0.5)
+    # driver.find_element(By.ID, 'admission_list_next').click()
+    # sleep(0.5)
+    # driver.find_element(By.XPATH, "//a[normalize-space()='1']").click()
+    # sleep(0.5)
+    # delete single application
+    # driver.find_element(By.XPATH, "//label[@for='application_ids_117']").click()
+    # sleep(0.25)
+
+    # delete all applications
+    # driver.find_element(By.ID, 'select_all').click()
+    # sleep(0.5)
+    # driver.find_element(By.ID, 'delete_applications').click()
+    # sleep(0.5)
+    # print('---------Application(s) deleted successfully.--------')
+
+
+
+
 
 
 
 # setUp()
 # login()
 # create_new_student()
-# create_new_application()
 # edit_student_details()
 # view_application_list()
 # create_referral()
 # commissions()
 # sort_by_dropdown_menu()
+# create_new_application()
 # filter_by_study_area()
 # filter_by_city()
 # filter_by_program()
 # schools()
 # schools_sort_by()
+# add_my_favorite()
+# connect_to_wegostudy()
+# visit_college_website()
+# tuition()
+# apply_now()
+# study_area_prog_lev()
+# application_page()
 # logout()
 # tearDown()
